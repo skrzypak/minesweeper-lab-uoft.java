@@ -182,7 +182,7 @@
       </VBox>
       <HBox layoutX="50.0" layoutY="386.0" prefHeight="50.0" prefWidth="550.0">
          <children>
-            <Button mnemonicParsing="false" text="START NEW GAME">
+            <Button focusTraversable="false" mnemonicParsing="false" text="START NEW GAME">
                <HBox.margin>
                   <Insets top="10.0" />
                </HBox.margin>
