@@ -1,49 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.*?>
-
 <StackPane
-           fx:controller="pl.polsl.lab.saper.controller.AppController"
-           xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-         <VBox
-               alignment="center"
-               minHeight="50.0"
-               maxHeight="620.0"
-               maxWidth="620.0"
-               prefHeight="Infinity"
-               prefWidth="Infinity"
-               >
+        xmlns:fx="http://javafx.com/fxml/1"
+        fx:controller="pl.polsl.lab.saper.controller.AppController" xmlns="http://javafx.com/javafx/8">
+    <children>
+        <VBox
+                alignment="center"
+                minHeight="50.0"
+                maxHeight="620.0"
+                maxWidth="620.0"
+                prefHeight="Infinity"
+                prefWidth="Infinity"
+        >
             <children>
-               <VBox fx:id="boardViewFXML"
-                     maxHeight="550.0"
-                     maxWidth="550.0"
-                     alignment="center"
-               >
-                  <children>
-                  </children>
-               </VBox>
-               <HBox alignment="center" minHeight="50.0" maxHeight="50.0" maxWidth="550.0">
-                  <children>
-                     <Button prefWidth="120.0" focusTraversable="false" onAction="#startNewGame" mnemonicParsing="false" text="START NEW GAME">
-                     </Button>
-                     <TextField focusTraversable="false" promptText="[*, o] [row index] [col index]"
-                                fx:id="inputRoundValue" prefHeight="25.0"
-                                onAction="#userManualInput" prefWidth="290.0" disable="true">
-                        <HBox.margin>
-                           <Insets left="10.0"  />
-                        </HBox.margin>
-                     </TextField>
-                     <Button focusTraversable="false" mnemonicParsing="false" onAction="#exit" prefHeight="25.0" prefWidth="120.0" text="EXIT">
-                        <HBox.margin>
-                           <Insets left="10.0" />
-                        </HBox.margin>
-                     </Button>
-                  </children>
-               </HBox>
+                <VBox fx:id="boardViewFXML"
+                      maxHeight="550.0"
+                      maxWidth="550.0"
+                      alignment="center"
+                >
+                    <children>
+                    </children>
+                </VBox>
+                <HBox alignment="center" minHeight="50.0" maxHeight="50.0" maxWidth="550.0">
+                    <children>
+                        <Button prefWidth="120.0" focusTraversable="false" onAction="#startNewGame"
+                                mnemonicParsing="false" text="START NEW GAME">
+                        </Button>
+                        <TextField focusTraversable="false" promptText="[*, o] [row index] [col index]"
+                                   fx:id="inputRoundValue" prefHeight="25.0"
+                                   onAction="#userManualInput" prefWidth="290.0" disable="true">
+                            <HBox.margin>
+                                <Insets left="10.0"/>
+                            </HBox.margin>
+                        </TextField>
+                        <Button focusTraversable="false" mnemonicParsing="false" onAction="#exit" prefHeight="25.0"
+                                prefWidth="120.0" text="EXIT">
+                            <HBox.margin>
+                                <Insets left="10.0"/>
+                            </HBox.margin>
+                        </Button>
+                    </children>
+                </HBox>
             </children>
-         </VBox>
-   </children>
+        </VBox>
+    </children>
 </StackPane>

@@ -7,6 +7,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.stage.StageStyle;
 import pl.polsl.lab.saper.model.Dimensions;
 
 import java.util.Optional;
@@ -29,6 +30,9 @@ public class MenuDialogView implements IErrorView {
     public Optional<Dimensions> show(String msg, Dimensions prev) {
 
         javafx.scene.control.Dialog<Dimensions> dialog = new javafx.scene.control.Dialog<>();
+
+        dialog.initStyle(StageStyle.UTILITY);
+
         dialog.setTitle("Start new game");
         dialog.setHeaderText(msg);
 

@@ -4,6 +4,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.StageStyle;
 import pl.polsl.lab.saper.controller.GameController;
 import pl.polsl.lab.saper.model.GameBoard;
 import pl.polsl.lab.saper.model.IEnumGame;
@@ -145,6 +146,7 @@ public class GameView implements IErrorView {
     public void showResult(IEnumGame.GameResult gameResult, ArrayList<Index> minesIndex) {
         renderResult(minesIndex);
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.initStyle(StageStyle.UTILITY);
         alert.setTitle("Game End");
         alert.setHeaderText("Result");
         if (gameResult == IEnumGame.GameResult.WIN) {

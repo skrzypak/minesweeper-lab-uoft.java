@@ -105,6 +105,8 @@ public class GameController {
      * Method set field as selected. Method update game model and view
      *
      * @param inx field index object
+     * @param mine number of mine
+     * @throws FieldException when invalid index of field
      */
     private void setFieldAsSelected(Index inx, Integer mine) throws FieldException {
         gameModel.setFieldAsSelected(mine, inx);
@@ -115,6 +117,7 @@ public class GameController {
      * Method switch field mark. Method update game model and view
      *
      * @param inx field index object
+     * @throws FieldException when invalid index of field
      */
     private void switchFieldMark(Index inx) throws FieldException {
         if (gameModel.getInfoAboutMark(inx)) {
