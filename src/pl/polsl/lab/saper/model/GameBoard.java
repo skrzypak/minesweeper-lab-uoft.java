@@ -46,35 +46,33 @@ public class GameBoard {
 
     /**
      * Get field data from index
-     * @param rowInx row index
-     * @param colInx column index
+     * @param inx field index object
      * @return field data if found, otherwise null
      */
-    public Field get(Integer rowInx, Integer colInx) {
+    public Field get(Index inx) {
         Optional<Field> fieldOptional = this.fields.stream()
-                .filter(f -> f.getRowIndex().equals(rowInx))
-                .filter(f -> f.getColIndex().equals(colInx))
+                .filter(f -> f.getRowIndex().equals(inx.getRowIndex()))
+                .filter(f -> f.getColIndex().equals(inx.getColIndex()))
                 .findFirst();
         return fieldOptional.orElse(null);
     }
 
     /**
      * Generate new empty field with index and putEmptyField to board
-     * @param rowInx row index of field
-     * @param colInx column index of field
+     * @param inx field index object
      * @throws FieldException if field value is game board border or out of range
      */
-    public void putEmptyField(Integer rowInx, Integer colInx) throws FieldException {
-        if(rowInx < 0 || rowInx >= this.numOfRows) throw new FieldException("Row index out of range of board height");
-        if(colInx < 0 || colInx >= this.numOfCols) throw new FieldException("Column index out of range of board  width");
+    public void putEmptyField(Index inx) throws FieldException {
+        if(inx.getRowIndex() < 0 || inx.getRowIndex() >= this.numOfRows) throw new FieldException("Row index out of range of board height");
+        if(inx.getColIndex() < 0 || inx.getColIndex() >= this.numOfCols) throw new FieldException("Column index out of range of board  width");
         Optional<Field> optional = this.fields.stream()
-                .filter(f -> f.getRowIndex().equals(rowInx))
-                .filter(f -> f.getColIndex().equals(colInx))
+                .filter(f -> f.getRowIndex().equals(inx.getRowIndex()))
+                .filter(f -> f.getColIndex().equals(inx.getColIndex()))
                 .findFirst();
         if(optional.isPresent()) {
             throw new FieldException("Field with this index exists");
         }
-        this.fields.add(new Field(rowInx, colInx));
+        this.fields.add(new Field(inx));
     }
 
     /**

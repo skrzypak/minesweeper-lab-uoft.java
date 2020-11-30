@@ -10,6 +10,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 import pl.polsl.lab.saper.controller.GameController;
 import pl.polsl.lab.saper.exception.FieldException;
 import pl.polsl.lab.saper.model.Game;
+import pl.polsl.lab.saper.model.Index;
+
 import java.util.stream.Stream;
 
 /**
@@ -26,24 +28,24 @@ class GameTest {
      */
     private static Stream<Arguments> FieldExceptionRowGenerator() {
         return Stream.of(
-                Arguments.of(new Game(10, 10), 0, 0),
-                Arguments.of(new Game(10, 10), 0, 10),
-                Arguments.of(new Game(10, 10), 11, 0),
-                Arguments.of(new Game(10, 10), 12, 0),
-                Arguments.of(new Game(10, 10), 11, 11),
-                Arguments.of(new Game(10, 10), 12, 12),
-                Arguments.of(new Game(5, 5), -5, 5),
-                Arguments.of(new Game(5, 5), -5, -5)
+                Arguments.of(new Game(10, 10), new Index(0, 0)),
+                Arguments.of(new Game(10, 10), new Index(0, 10)),
+                Arguments.of(new Game(10, 10), new Index(11, 0)),
+                Arguments.of(new Game(10, 10), new Index(12, 0)),
+                Arguments.of(new Game(10, 10), new Index(11, 11)),
+                Arguments.of(new Game(10, 10), new Index(12, 12)),
+                Arguments.of(new Game(5, 5), new Index(-5, 5)),
+                Arguments.of(new Game(5, 5), new Index(-5, -5))
         );
     }
 
     @ParameterizedTest
     @Description("Testing wrong row index behaviour")
     @MethodSource("FieldExceptionRowGenerator")
-    void isCorrectFieldRowExceptions(Game game, int rowInx, int colInx) {
+    void isCorrectFieldRowExceptions(Game game, Index inx) {
         FieldException exception = assertThrows(
                 FieldException.class,
-                () -> game.isCorrectField(rowInx, colInx)
+                () -> game.isCorrectField(inx)
         );
         assertEquals("Invalid row index", exception.getMessage());
     }
@@ -54,23 +56,23 @@ class GameTest {
      */
     private static Stream<Arguments> FieldExceptionColGenerator() {
         return Stream.of(
-                Arguments.of(new Game(10, 10), 1, 0),
-                Arguments.of(new Game(10, 10), 1, 11),
-                Arguments.of(new Game(10, 10), 1, 12),
-                Arguments.of(new Game(10, 10), 10, 0),
-                Arguments.of(new Game(10, 10), 10, 11),
-                Arguments.of(new Game(10, 10), 10, 12),
-                Arguments.of(new Game(5, 5), 5, -5)
+                Arguments.of(new Game(10, 10), new Index(1, 0)),
+                Arguments.of(new Game(10, 10), new Index(1, 11)),
+                Arguments.of(new Game(10, 10), new Index(1, 12)),
+                Arguments.of(new Game(10, 10), new Index(10, 0)),
+                Arguments.of(new Game(10, 10), new Index(10, 11)),
+                Arguments.of(new Game(10, 10), new Index(10, 12)),
+                Arguments.of(new Game(5, 5), new Index(5, -5))
         );
     }
 
     @ParameterizedTest
     @Description("Testing wrong column index behaviour")
     @MethodSource("FieldExceptionColGenerator")
-    void isCorrectFieldColExceptions(Game game, int rowInx, int colInx) {
+    void isCorrectFieldColExceptions(Game game, Index inx) {
         FieldException exception = assertThrows(
                 FieldException.class,
-                () -> game.isCorrectField(rowInx, colInx)
+                () -> game.isCorrectField(inx)
         );
         assertEquals("Invalid column index", exception.getMessage());
     }
@@ -81,24 +83,24 @@ class GameTest {
      */
     private static Stream<Arguments> FieldGenerator() {
         return Stream.of(
-                Arguments.of(new Game(1, 1), 1, 1),
-                Arguments.of(new Game(10, 10), 1, 1),
-                Arguments.of(new Game(10, 10), 10, 10),
-                Arguments.of(new Game(10, 10), 5, 5),
-                Arguments.of(new Game(10, 10), 3, 8),
-                Arguments.of(new Game(2, 2), 1, 1),
-                Arguments.of(new Game(2, 2), 1, 2),
-                Arguments.of(new Game(2, 2), 2, 1),
-                Arguments.of(new Game(2, 2), 1, 2)
+                Arguments.of(new Game(1, 1), new Index(1, 1)),
+                Arguments.of(new Game(10, 10), new Index(1, 1)),
+                Arguments.of(new Game(10, 10), new Index(10, 10)),
+                Arguments.of(new Game(10, 10), new Index(5, 5)),
+                Arguments.of(new Game(10, 10), new Index(3, 8)),
+                Arguments.of(new Game(2, 2), new Index(1, 1)),
+                Arguments.of(new Game(2, 2), new Index(1, 2)),
+                Arguments.of(new Game(2, 2), new Index(2, 1)),
+                Arguments.of(new Game(2, 2), new Index(1, 2))
         );
     }
 
     @ParameterizedTest
     @Description("Testing correct field index")
     @MethodSource("FieldGenerator")
-    void isCorrectFieldTest(Game game, int rowInx, int colInx) {
+    void isCorrectFieldTest(Game game, Index inx) {
         assertAll(
-                () -> assertDoesNotThrow(() -> game.isCorrectField(rowInx, colInx))
+                () -> assertDoesNotThrow(() -> game.isCorrectField(inx))
         );
     }
 

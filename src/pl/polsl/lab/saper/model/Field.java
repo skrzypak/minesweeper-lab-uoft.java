@@ -15,11 +15,10 @@ public class Field extends Index {
 
     /**
      * Class constructor
-     * @param rowInx index of row field
-     * @param colInx index of column field
+     * @param inx field index object
      */
-    public Field(Integer rowInx, Integer colInx) {
-        super(rowInx, colInx);
+    public Field(Index inx) {
+        super(inx.getRowIndex(), inx.getColIndex());
         this.mine = false;
         this.marked = false;
         this.selected = false;

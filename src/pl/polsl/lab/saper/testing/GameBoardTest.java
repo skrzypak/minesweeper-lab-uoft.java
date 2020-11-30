@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pl.polsl.lab.saper.exception.FieldException;
 import pl.polsl.lab.saper.model.GameBoard;
+import pl.polsl.lab.saper.model.Index;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -22,17 +23,18 @@ class GameBoardTest {
     void putEmptyFieldTest() {
         GameBoard gameBoard = new GameBoard(2, 2);
         assertAll(
-                () -> assertDoesNotThrow(() -> gameBoard.putEmptyField(0, 0)),
-                () -> assertDoesNotThrow(() -> gameBoard.putEmptyField(1, 1)),
-                () -> assertDoesNotThrow(() -> gameBoard.putEmptyField(2, 2)),
-                () -> assertDoesNotThrow(() -> gameBoard.putEmptyField(3, 3)),
-                () -> assertThrows(FieldException.class, () -> gameBoard.putEmptyField(0, 0)),
-                () -> assertThrows(FieldException.class, () -> gameBoard.putEmptyField(1, 1)),
-                () -> assertThrows(FieldException.class, () -> gameBoard.putEmptyField(0, 0)),
-                () -> assertThrows(FieldException.class, () -> gameBoard.putEmptyField(4, 4)),
-                () -> assertThrows(FieldException.class, () -> gameBoard.putEmptyField(-1, 0)),
-                () -> assertThrows(FieldException.class, () -> gameBoard.putEmptyField(0, -1)),
-                () -> assertThrows(NullPointerException.class, () -> gameBoard.putEmptyField(null, null))
+                () -> assertDoesNotThrow(() -> gameBoard.putEmptyField(new Index(0, 0))),
+                () -> assertDoesNotThrow(() -> gameBoard.putEmptyField(new Index(1, 1))),
+                () -> assertDoesNotThrow(() -> gameBoard.putEmptyField(new Index(2, 2))),
+                () -> assertDoesNotThrow(() -> gameBoard.putEmptyField(new Index(3, 3))),
+                () -> assertThrows(FieldException.class, () -> gameBoard.putEmptyField(new Index(0, 0))),
+                () -> assertThrows(FieldException.class, () -> gameBoard.putEmptyField(new Index(1, 1))),
+                () -> assertThrows(FieldException.class, () -> gameBoard.putEmptyField(new Index(0, 0))),
+                () -> assertThrows(FieldException.class, () -> gameBoard.putEmptyField(new Index(4, 4))),
+                () -> assertThrows(FieldException.class, () -> gameBoard.putEmptyField(new Index(-1, 0))),
+                () -> assertThrows(FieldException.class, () -> gameBoard.putEmptyField(new Index(0, -1))),
+                () -> assertThrows(NullPointerException.class, () ->
+                        gameBoard.putEmptyField(new Index(null, null)))
         );
     }
 }
