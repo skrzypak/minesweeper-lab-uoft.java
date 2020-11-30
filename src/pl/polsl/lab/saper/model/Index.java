@@ -12,6 +12,7 @@ public class Index {
 
     /**
      * Class constructor.
+     *
      * @param row index of row
      * @param col index of col
      */
@@ -20,10 +21,20 @@ public class Index {
         this.col = col;
     }
 
-    public Integer getRowIndex(){
+    /**
+     * Get row index integer.
+     *
+     * @return the integer
+     */
+    public Integer getRowIndex() {
         return this.row;
     }
 
+    /**
+     * Gets col index.
+     *
+     * @return the col index
+     */
     public Integer getColIndex() {
         return this.col;
     }

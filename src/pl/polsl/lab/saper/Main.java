@@ -17,24 +17,25 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    @Override
-    public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("Game.fxml"));
-        primaryStage.setTitle("Minesweeper");
-        primaryStage.setScene(new Scene(root, 650, 650));
-        primaryStage.setResizable(false);
-        primaryStage.show();
-    }
-
     /**
      * Main function (arguments are optionals)
      * Arguments:
      * [-m Integer] board game height
      * [-n Integer] board game width;
+     *
      * @param args program arguments
      */
     public static void main(String[] args) {
         launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("Game.fxml"));
+        primaryStage.setTitle("Minesweeper");
+        primaryStage.setScene(new Scene(root));
+        primaryStage.sizeToScene();
+        primaryStage.show();
     }
 
 }

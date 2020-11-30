@@ -1,5 +1,6 @@
 package pl.polsl.lab.saper.view;
 
+import javafx.scene.control.Alert;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -7,7 +8,6 @@ import pl.polsl.lab.saper.controller.GameController;
 import pl.polsl.lab.saper.model.GameBoard;
 import pl.polsl.lab.saper.model.IEnumGame;
 import pl.polsl.lab.saper.model.Index;
-import pl.polsl.lab.saper.view.field.FieldView;
 
 import java.util.ArrayList;
 
@@ -19,20 +19,27 @@ import java.util.ArrayList;
  */
 public class GameView implements IErrorView {
 
-    private final ArrayList<FieldView> boardView = new ArrayList<>();
+    private final ArrayList<FieldView> boardView = new ArrayList<>(); // Contain references to fields
 
-    public void initializeView(VBox boardViewFXM, GameBoard gameBoard, GameController gameController) {
+    /**
+     * Method initialize game board view
+     *
+     * @param boardViewFXML  main container from .fxml file
+     * @param gameBoard      game baord data ref
+     * @param gameController game container ref
+     */
+    public void initializeView(VBox boardViewFXML, GameBoard gameBoard, GameController gameController) {
 
-        boardViewFXM.getChildren().clear();
+        boardViewFXML.getChildren().clear();
 
         Double fieldSize;
-        if(gameBoard.getNumOfRows() > gameBoard.getNumOfCols()) {
-            fieldSize = boardViewFXM.getMaxHeight() / (gameBoard.getNumOfRows() - 2);
+        if (gameBoard.getNumOfRows() > gameBoard.getNumOfCols()) {
+            fieldSize = boardViewFXML.getMaxHeight() / (gameBoard.getNumOfRows() - 2);
         } else {
-            fieldSize = boardViewFXM.getMaxWidth() / (gameBoard.getNumOfCols() - 2);
+            fieldSize = boardViewFXML.getMaxWidth() / (gameBoard.getNumOfCols() - 2);
         }
 
-        if(fieldSize < 10) fieldSize = 10.0;
+        if (fieldSize < 10) fieldSize = 10.0;
 
         for (int i = 1; i < gameBoard.getNumOfRows() - 1; i++) {
             HBox row = new HBox();
@@ -40,21 +47,26 @@ public class GameView implements IErrorView {
                 Index inx = new Index(i, j);
                 FieldView f = new FieldView(inx, fieldSize);
                 f.getField().setOnMouseClicked(event -> {
-                    if(event.getButton() == MouseButton.PRIMARY) {
+                    if (event.getButton() == MouseButton.PRIMARY) {
                         gameController.onMouseButtonPrimaryFieldClick(inx);
                         f.getField().setOnMouseClicked(null);
-                    }
-                    else if(event.getButton() == MouseButton.SECONDARY) {
+                    } else if (event.getButton() == MouseButton.SECONDARY) {
                         gameController.onMouseButtonSecondaryFieldClick(inx);
                     }
                 });
                 this.boardView.add(f);
                 row.getChildren().add(f.getField());
             }
-            boardViewFXM.getChildren().add(row);
+            boardViewFXML.getChildren().add(row);
         }
     }
 
+    /**
+     * Method update field view
+     *
+     * @param inx index of field
+     * @param sym new field text
+     */
     public void updateFieldView(Index inx, Character sym) {
         this.boardView.stream()
                 .filter(f -> f.getInx().getRowIndex().equals(inx.getRowIndex()))
@@ -66,53 +78,83 @@ public class GameView implements IErrorView {
                 });
     }
 
-
+    /**
+     * Get field symbol used in game
+     *
+     * @param num number of mines
+     * @return symbol selected field symbol
+     */
     public Character getSelectedFieldSymbol(Integer num) {
         return (Character) (char) (num + '0');
     }
 
+    /**
+     * Get marked field symbol
+     *
+     * @return symbol marked field symbol
+     */
     public Character getMarkedFieldSymbol() {
         return '*';
     }
 
+    /**
+     * Get mine filed symol
+     *
+     * @return symbol
+     */
     private Character getMineSymbol() {
         return 'M';
     }
 
-
+    /**
+     * Get symbol when field is not selected or marked
+     *
+     * @return symbol empty field symbol
+     */
     public Character getEmptyFieldSymbol() {
         return ' ';
     }
 
+    /**
+     * Show game result and render mines
+     *
+     * @param minesIndex all field index which contain mine
+     */
     private void renderResult(ArrayList<Index> minesIndex) {
-        for (Index i: minesIndex) {
+        for (Index i : minesIndex) {
             this.boardView.stream()
                     .filter(fw -> fw.getInx().getRowIndex().equals(i.getRowIndex()))
                     .filter(fw -> fw.getInx().getColIndex().equals(i.getColIndex()))
                     .findFirst()
-                    .map(fw-> {
+                    .map(fw -> {
                         fw.setText(getMineSymbol());
                         return fw;
                     });
         }
-        for (FieldView fw: boardView) {
+        for (FieldView fw : boardView) {
             fw.getField().setOnMouseClicked(null);
         }
     }
 
     /**
      * Method render game result
+     *
      * @param gameResult game result enum
+     * @param minesIndex the mines index
      */
     public void showResult(IEnumGame.GameResult gameResult, ArrayList<Index> minesIndex) {
-        if(gameResult == IEnumGame.GameResult.WIN) {
-            System.out.print("YOU WIN :)\n");
-        } else if(gameResult == IEnumGame.GameResult.LOSE) {
-            System.out.print("YOU LOSE :(\n");
-        } else if(gameResult == IEnumGame.GameResult.CANCELED){
-            System.out.print("GAME CANCELED\n");
-        }
         renderResult(minesIndex);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Game End");
+        alert.setHeaderText("Result");
+        if (gameResult == IEnumGame.GameResult.WIN) {
+            alert.setContentText("YOU WIN :)\n");
+        } else if (gameResult == IEnumGame.GameResult.LOSE) {
+            alert.setContentText("YOU LOSE :(\n");
+        } else {
+            alert.setContentText("GAME CANCELED\n");
+        }
+        alert.showAndWait();
     }
 
 }

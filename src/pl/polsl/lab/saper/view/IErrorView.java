@@ -1,28 +1,26 @@
 package pl.polsl.lab.saper.view;
 
+import javafx.scene.control.Alert;
+
 /**
  * Interface that render error to screen
  *
  * @author Konrad Skrzypczyk
- * @version 1.0
+ * @version 2.0
  */
 public interface IErrorView {
 
     /**
-     * The constant ANSI_RED, define red color
-     */
-    String ANSI_RED = "\u001B[31m";
-    /**
-     * The constant ANSI_RESET, define neutral color
-     */
-    String ANSI_RESET = "\u001B[0m";
-
-    /**
-     * Render message error
+     * Show message error
+     *
      * @param msg message in String format
      */
     default void err(String msg) {
-        System.out.println(ANSI_RED + msg + ANSI_RESET);
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Detect error");
+        alert.setHeaderText(null);
+        alert.setContentText(msg);
+        alert.showAndWait();
     }
 
 }

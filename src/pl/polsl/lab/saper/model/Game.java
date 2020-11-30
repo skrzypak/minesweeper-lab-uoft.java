@@ -17,6 +17,7 @@ public class Game {
 
     /**
      * Class constructor.
+     *
      * @param height new board height;
      * @param width  new board width;
      * @throws OutOfMemoryError when board is to big
@@ -35,9 +36,10 @@ public class Game {
 
     /**
      * Method initialize empty new board game
+     *
      * @param height new board height;
-     * @param width new board width;
-     * */
+     * @param width  new board width;
+     */
     private void createBoard(Integer height, Integer width) {
 
         this.gameBoard = new GameBoard(height, width);
@@ -47,13 +49,15 @@ public class Game {
             for (int j = 0; j < this.gameBoard.getNumOfCols(); j++) {
                 try {
                     this.gameBoard.putEmptyField(new Index(i, j));
-                } catch (FieldException ignored) { }
+                } catch (FieldException ignored) {
+                }
             }
         }
     }
 
     /**
      * Return game board
+     *
      * @return game board array
      */
     public GameBoard getBoardData() {
@@ -62,6 +66,7 @@ public class Game {
 
     /**
      * Get game status
+     *
      * @return Game end (0), Game running (1)
      */
     public Boolean getRunning() {
@@ -70,6 +75,7 @@ public class Game {
 
     /**
      * Method set filed as mark
+     *
      * @param inx field index object
      * @throws FieldException if field value is game board border or out of range
      */
@@ -80,6 +86,7 @@ public class Game {
 
     /**
      * Method unmark filed
+     *
      * @param inx field index object
      * @throws FieldException if field value is game board border or out of range
      */
@@ -90,21 +97,23 @@ public class Game {
 
     /**
      * Method set filed as selected by player
+     *
      * @param num number of mine around field
      * @param inx field index object
      * @throws FieldException if field value is game board border or out of range
      */
     public void setFieldAsSelected(Integer num, Index inx) throws FieldException {
 
-        if(num < 0 || num > 8) throw new FieldException("Invalid number of mine");
+        if (num < 0 || num > 8) throw new FieldException("Invalid number of mine");
         isCorrectField(inx);
 
-        if(this.gameBoard.get(inx).setFieldAsSelected(num))
+        if (this.gameBoard.get(inx).setFieldAsSelected(num))
             this.freeFieldCounter--;
     }
 
     /**
      * Method return number of game board rows
+     *
      * @return number of rows
      */
     public Integer getNumOfRows() {
@@ -113,6 +122,7 @@ public class Game {
 
     /**
      * Method return number of game board columns
+     *
      * @return number of columns
      */
     public Integer getNumOfCols() {
@@ -121,6 +131,7 @@ public class Game {
 
     /**
      * Method return info about is field a mine
+     *
      * @param inx field index object
      * @return true if is mine, otherwise false
      * @throws FieldException if field value is game board border or out of range
@@ -132,6 +143,7 @@ public class Game {
 
     /**
      * Method return info about is field mark
+     *
      * @param inx field index object
      * @return true if is selected, otherwise false
      * @throws FieldException if field value is game board border or out of range
@@ -174,6 +186,7 @@ public class Game {
 
     /**
      * Method return game result
+     *
      * @return LOSE (player lose) ,WIN (player wind), NONE (currently no result)
      */
     public IEnumGame.GameResult getGameResult() {
@@ -182,6 +195,7 @@ public class Game {
 
     /**
      * Method return number of non selected fields by user
+     *
      * @return number of non selected fields
      */
     public int getFreeFieldCounter() {
@@ -190,6 +204,7 @@ public class Game {
 
     /**
      * Method set number of non selected fields by user
+     *
      * @param num new number
      */
     public void setFreeFieldCounter(Integer num) {
@@ -198,6 +213,7 @@ public class Game {
 
     /**
      * Method return info about field was selected earlier by player
+     *
      * @param inx field index object
      * @return true if was selected, otherwise false
      * @throws FieldException if field value is game board border or out of range
@@ -209,12 +225,15 @@ public class Game {
 
     /**
      * Method check that field is correct
+     *
      * @param inx field index object
      * @throws FieldException if field value is game board border or out of range
      */
     public void isCorrectField(Index inx) throws FieldException {
-        if(inx.getRowIndex() <= 0 || inx.getRowIndex() > getNumOfRows() - 2) throw new FieldException("Invalid row index");
-        if(inx.getColIndex() <= 0 || inx.getColIndex() > getNumOfCols() - 2) throw new FieldException("Invalid column index");
+        if (inx.getRowIndex() <= 0 || inx.getRowIndex() > getNumOfRows() - 2)
+            throw new FieldException("Invalid row index");
+        if (inx.getColIndex() <= 0 || inx.getColIndex() > getNumOfCols() - 2)
+            throw new FieldException("Invalid column index");
     }
 }
 

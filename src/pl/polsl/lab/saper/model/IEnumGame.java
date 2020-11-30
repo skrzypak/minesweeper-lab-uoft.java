@@ -16,6 +16,21 @@ public interface IEnumGame {
      * CANCELED player canceled game
      */
     enum GameResult {
-        NONE, LOSE, WIN, CANCELED
+        /**
+         * None game result.
+         */
+        NONE,
+        /**
+         * Lose game result.
+         */
+        LOSE,
+        /**
+         * Win game result.
+         */
+        WIN,
+        /**
+         * Canceled game result.
+         */
+        CANCELED
     }
 }

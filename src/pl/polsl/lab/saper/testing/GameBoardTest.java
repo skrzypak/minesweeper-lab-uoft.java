@@ -17,6 +17,9 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class GameBoardTest {
 
+    /**
+     * Put empty field test.
+     */
     @Test
     @DisplayName("Testing putEmptyField method")
     @Description("Testing throws behaviour in putEmptyField method from GameBoard class")

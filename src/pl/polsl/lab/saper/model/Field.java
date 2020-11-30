@@ -15,6 +15,7 @@ public class Field extends Index {
 
     /**
      * Class constructor
+     *
      * @param inx field index object
      */
     public Field(Index inx) {
@@ -42,11 +43,12 @@ public class Field extends Index {
 
     /**
      * Method set field as selected
+     *
      * @param num number of mine around field
      * @return false when filed was selected earlier, otherwise true
      */
     public boolean setFieldAsSelected(Integer num) {
-        if(!this.selected) {
+        if (!this.selected) {
             this.aroundMines = num;
             this.selected = true;
             return true;
@@ -56,6 +58,7 @@ public class Field extends Index {
 
     /**
      * Method return info about mine
+     *
      * @return true if filed is mine, otherwise false
      */
     public boolean isMine() {
@@ -64,6 +67,7 @@ public class Field extends Index {
 
     /**
      * Method return info about selected proper value field
+     *
      * @return true if selected earlier, otherwise false
      */
     public boolean isSelected() {
@@ -72,6 +76,7 @@ public class Field extends Index {
 
     /**
      * Method return info about marked proper value field
+     *
      * @return true if marked by player, otherwise false
      */
     public boolean isMarked() {
@@ -81,6 +86,7 @@ public class Field extends Index {
     /**
      * Method return info about number of mines around field
      * Remember that number of mines is update during call setFieldAsSelected(Integer num)
+     *
      * @return number of mines around field if field was selected, otherwise 0
      */
     public Integer getNumOfMinesAroundField() {

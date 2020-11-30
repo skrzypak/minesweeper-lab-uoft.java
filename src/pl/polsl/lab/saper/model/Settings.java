@@ -20,31 +20,37 @@ public class Settings {
     }
 
     /**
-    * @return last board height input
-    * */
+     * Gets last board height input.
+     *
+     * @return last board height input
+     */
     public Integer getLastBoardHeightInput() {
         return this.lastBoardHeightInput;
     }
 
     /**
-     * @return last board width input
-     * */
-    public Integer getLastBoardWidthInput() {
-        return this.lastBoardWidthInput;
-    }
-
-    /**
      * Set last board height input from user
+     *
      * @param num input value in Integer format
-     * */
+     */
     public void setLastBoardHeightInput(Integer num) {
         this.lastBoardHeightInput = num;
     }
 
     /**
+     * Gets last board width input.
+     *
+     * @return last board width input
+     */
+    public Integer getLastBoardWidthInput() {
+        return this.lastBoardWidthInput;
+    }
+
+    /**
      * Set last board width input from user
+     *
      * @param num input value in Integer format
-     * */
+     */
     public void setLastBoardWidthInput(Integer num) {
         this.lastBoardWidthInput = num;
     }

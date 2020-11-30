@@ -13,12 +13,16 @@ import java.util.Optional;
  */
 public class GameBoard {
 
-    ArrayList<Field> fields;                 // Game fields
     private final Integer numOfRows;         // Game board height, user input height + 2
     private final Integer numOfCols;         // Game board width, user input width + 2
+    /**
+     * The Fields.
+     */
+    ArrayList<Field> fields;                 // Game fields
 
     /**
      * Class constructor.
+     *
      * @param height new board height;
      * @param width  new board width;
      */
@@ -30,6 +34,7 @@ public class GameBoard {
 
     /**
      * Get num of board rows
+     *
      * @return num of rows
      */
     public Integer getNumOfRows() {
@@ -38,6 +43,7 @@ public class GameBoard {
 
     /**
      * Get num of board columns
+     *
      * @return num of columns
      */
     public Integer getNumOfCols() {
@@ -46,6 +52,7 @@ public class GameBoard {
 
     /**
      * Get field data from index
+     *
      * @param inx field index object
      * @return field data if found, otherwise null
      */
@@ -59,17 +66,20 @@ public class GameBoard {
 
     /**
      * Generate new empty field with index and putEmptyField to board
+     *
      * @param inx field index object
      * @throws FieldException if field value is game board border or out of range
      */
     public void putEmptyField(Index inx) throws FieldException {
-        if(inx.getRowIndex() < 0 || inx.getRowIndex() >= this.numOfRows) throw new FieldException("Row index out of range of board height");
-        if(inx.getColIndex() < 0 || inx.getColIndex() >= this.numOfCols) throw new FieldException("Column index out of range of board  width");
+        if (inx.getRowIndex() < 0 || inx.getRowIndex() >= this.numOfRows)
+            throw new FieldException("Row index out of range of board height");
+        if (inx.getColIndex() < 0 || inx.getColIndex() >= this.numOfCols)
+            throw new FieldException("Column index out of range of board  width");
         Optional<Field> optional = this.fields.stream()
                 .filter(f -> f.getRowIndex().equals(inx.getRowIndex()))
                 .filter(f -> f.getColIndex().equals(inx.getColIndex()))
                 .findFirst();
-        if(optional.isPresent()) {
+        if (optional.isPresent()) {
             throw new FieldException("Field with this index exists");
         }
         this.fields.add(new Field(inx));
@@ -77,6 +87,7 @@ public class GameBoard {
 
     /**
      * Returning raw board fields
+     *
      * @return fields ArrayList
      */
     public ArrayList<Field> raw() {
