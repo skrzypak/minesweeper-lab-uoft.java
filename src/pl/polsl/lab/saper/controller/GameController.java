@@ -1,10 +1,12 @@
 package pl.polsl.lab.saper.controller;
 
+import javafx.scene.layout.VBox;
 import pl.polsl.lab.saper.exception.FieldException;
 import pl.polsl.lab.saper.model.Game;
 import pl.polsl.lab.saper.model.Index;
 import pl.polsl.lab.saper.view.GameView;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -38,7 +40,7 @@ public class GameController {
             this.gameModel = null;
             throw new OutOfMemoryError(e.getMessage());
         }
-        gameView = new GameView(height, width);
+        gameView = new GameView();
     }
 
     /**
@@ -89,15 +91,59 @@ public class GameController {
         }
     }
 
-    /**
-     * Function responsible for render current round scene (view)
-     */
-    public void playRound() {
-        gameView.renderBoard(gameModel.getBoardData(), false);
-        String input;
-        do {
-            input = gameView.getInputFromUser();
-        } while(!updateField(input));
+    public void initializeBoardView(VBox boardViewFXML) {
+
+        gameView.initializeView(boardViewFXML, gameModel.getBoardData(), this);
+    }
+
+    private void setFieldAsSelected(Index inx, Integer mine) throws FieldException {
+        gameModel.setFieldAsSelected(mine, inx.getRowIndex(), inx.getColIndex());
+        gameView.updateFieldView(inx, gameView.getSelectedFieldSymbol(mine));
+    }
+
+    private void switchFieldMark(Index inx) throws FieldException {
+        if(gameModel.getInfoAboutMark(inx.getRowIndex(), inx.getColIndex())) {
+            gameModel.removeFieldMark(inx.getRowIndex(), inx.getColIndex());
+            gameView.updateFieldView(inx, gameView.getEmptyFieldSymbol());
+        } else {
+            gameModel.setFieldAsMark(inx.getRowIndex(), inx.getColIndex());
+            gameView.updateFieldView(inx, gameView.getMarkedFieldSymbol());
+        }
+    }
+
+    public void onMouseButtonPrimaryFieldClick(Index inx)  {
+        int rowInx = inx.getRowIndex();
+        int colInx = inx.getColIndex();
+        try {
+            Integer mines = countMines(rowInx, colInx);
+            if(mines == 0) findUntilNoZeroField(rowInx, colInx);
+            else setFieldAsSelected(new Index(rowInx, colInx), mines);
+            checkGameStatus(rowInx, colInx);
+        } catch (FieldException e) {
+            // TODO
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void onMouseButtonSecondaryFieldClick(Index inx) {
+        int rowInx = inx.getRowIndex();
+        int colInx = inx.getColIndex();
+        try {
+            switchFieldMark(new Index(rowInx, colInx));
+        } catch (FieldException e) {
+            // TODO
+            System.out.println(e.getMessage());
+        }
+    }
+
+
+
+    public void playFromRawText(String input) {
+        if(!isGameRunning()) return;
+        if(!updateField(input)) {
+            // TODO
+            System.out.println("Input error");
+        }
     }
 
     /**
@@ -131,16 +177,15 @@ public class GameController {
 
             gameModel.isCorrectField(rowInx, colInx);
 
-            if(sym.equals('*')) {
-                gameModel.setFieldAsMark(rowInx, colInx);
-            } else if(sym.equals('o')) {
+            if(sym.equals('*'))
+                switchFieldMark(new Index(rowInx, colInx));
+            else if(sym.equals('o')) {
                 Integer mines = countMines(rowInx, colInx);
 
-                if(mines == 0) {
+                if(mines == 0)
                     findUntilNoZeroField(rowInx, colInx);
-                } else {
-                    gameModel.setFieldAsSelected(mines, rowInx, colInx);
-                }
+                else
+                    setFieldAsSelected(new Index(rowInx, colInx), mines);
 
                 checkGameStatus(rowInx, colInx);
             } else {
@@ -204,7 +249,16 @@ public class GameController {
      * Function calling to renderGameResult in GameView class
      */
    private void gameResult() {
-       gameView.renderGameResult(gameModel.getBoardData(), gameModel.getGameResult());
+       ArrayList<Index> minesIndex = new ArrayList<>();
+       for(int i = 1; i < gameModel.getNumOfRows() - 1; i++) {
+           for(int j = 1; j < gameModel.getNumOfCols() - 1; j++) {
+               try {
+                   if(gameModel.getInfoAboutMine(i, j))
+                       minesIndex.add(new Index(i, j));
+               } catch (FieldException ignored) { }
+           }
+       }
+       gameView.showResult(gameModel.getGameResult(), minesIndex);
     }
 
     /**
@@ -257,14 +311,14 @@ public class GameController {
         if (countMines(row, col) > 0) {
             // Field is no mine but around have samo mine, so set field as selected and end recursive
             try {
-                gameModel.setFieldAsSelected(countMines(row, col), row, col);
+                setFieldAsSelected(new Index(row, col), countMines(row, col));
             } catch (FieldException ignored) { }
             return;
         }
 
         try {
-            // Field has no mine so set as 0, next call recursive next fields
-            gameModel.setFieldAsSelected(0, row, col);
+            // Field has no mine so set as 0, next call recursive to next fields
+            setFieldAsSelected(new Index(row, col), 0);
         } catch (FieldException ignored) { }
 
         findUntilNoZeroField(row + 1, col - 1);
@@ -277,4 +331,5 @@ public class GameController {
         findUntilNoZeroField(row - 1, col);
 
     }
+
 }

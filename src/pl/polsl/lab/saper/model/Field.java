@@ -87,4 +87,11 @@ public class Field extends Index {
     public Integer getNumOfMinesAroundField() {
         return this.aroundMines;
     }
+
+    /**
+     * Method remove mark from filed
+     */
+    public void removeFieldMark() {
+        this.marked = false;
+    }
 }

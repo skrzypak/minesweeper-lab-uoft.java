@@ -1,8 +1,10 @@
 package pl.polsl.lab.saper.controller;
 
-//import pl.polsl.lab.saper.model.Menu;
+import javafx.util.Pair;
 import pl.polsl.lab.saper.model.Settings;
 import pl.polsl.lab.saper.view.MenuView;
+
+import java.util.Optional;
 
 /**
  * Game menu controller class
@@ -23,57 +25,41 @@ public class MenuController {
         menuView = new MenuView();
     }
 
-    /**
-     * Method responsible to get height board value from user
-     * @return board height
-     */
-    public Integer getNewBoardHeight() {
-        Integer val;
-        String inp;
-        do {
-            inp = menuView.getNewBoardHeightFromUser();
-            val = parse(inp);
-        } while(val == null || val <= 0);
-        settings.setLastBoardHeightInput(val);
-        return val;
-    }
+    public Pair<Integer, Integer> show() {
+        Integer height = null;
+        Integer width = null;
 
-    /**
-     * Method responsible to get width board value from user
-     * @return board width
-     */
-    public Integer getNewBoardWidth() {
-        Integer val;
-        String inp;
-        do {
-            inp = menuView.getNewBoardWidthFromUser();
-            val = parse(inp);
-        } while(val == null || val <= 0);
-        settings.setLastBoardWidthInput(val);
-        return val;
-    }
+        Optional<Pair<String, String>> data = menuView.show("");
+        if(data.isPresent()) {
+            height = parse(data.get().getKey());
+            width = parse(data.get().getValue());
+        }
 
-    /**
-     * Method control if create new game
-     * @return true if user want start new game, otherwise false
-     */
-    public boolean checkIfStartNewGame() {
-        String sign;
-        do {
-            sign = menuView.askUserToStartNewGame();
-            if(sign.equals("n") || sign.equals("N")) return false;
-            if(sign.equals("y") || sign.equals("Y")) return true;
-        } while (true);
+        while(height == null || width == null) {
+            data = menuView.show("Wrong input data ...");
+            if(data.isPresent()) {
+                height = parse(data.get().getKey());
+                width = parse(data.get().getValue());
+            }
+        }
+
+        settings.setLastBoardHeightInput(height);
+        settings.setLastBoardWidthInput(width);
+
+        return new Pair<>(height, width);
     }
 
     /**
      * Method parse String to Integer
      * @param s number in String format
-     * @return number in integer if no err or null
+     * @return number if is in correct format and above 0, otherwise null
      */
     private Integer parse(String s) {
         try {
-            return Integer.parseInt(s);
+            int val = Integer.parseInt(s);
+            if(val > 0)
+                return val;
+            else return null;
         } catch (NumberFormatException e) {
             return null;
         }
@@ -84,6 +70,6 @@ public class MenuController {
      * @param msg the msg
      */
     public void err(String msg) {
-        menuView.err(msg);
+        System.out.println(msg);
     }
 }

@@ -6,198 +6,25 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<Pane fx:controller="pl.polsl.lab.saper.controller.AppController" prefHeight="650.0" prefWidth="650.0" maxHeight="650.0" maxWidth="650.0" minHeight="650.0" minWidth="650.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox layoutX="50.0" layoutY="25.0" maxHeight="350.0" maxWidth="550.0" minHeight="350.0" minWidth="550.0">
+      <VBox fx:id="boardViewFXML" id="boardViewFXML" layoutX="50.0" layoutY="25.0" maxHeight="550.0" maxWidth="550.0" minHeight="550.0" minWidth="550.0">
          <children>
-            <HBox>
-               <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" stroke="BLACK" strokeType="INSIDE" width="30.0" HBox.hgrow="NEVER">
-                     <HBox.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                     </HBox.margin>
-                  </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" stroke="BLACK" strokeType="INSIDE" width="30.0" HBox.hgrow="NEVER">
-                     <HBox.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                     </HBox.margin>
-                  </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" stroke="BLACK" strokeType="INSIDE" width="30.0" HBox.hgrow="NEVER">
-                     <HBox.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                     </HBox.margin>
-                  </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" stroke="BLACK" strokeType="INSIDE" width="30.0" HBox.hgrow="NEVER">
-                     <HBox.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                     </HBox.margin>
-                  </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" stroke="BLACK" strokeType="INSIDE" width="30.0" HBox.hgrow="NEVER">
-                     <HBox.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                     </HBox.margin>
-                  </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" stroke="BLACK" strokeType="INSIDE" width="30.0" HBox.hgrow="NEVER">
-                     <HBox.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                     </HBox.margin>
-                  </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" stroke="BLACK" strokeType="INSIDE" width="30.0" HBox.hgrow="NEVER">
-                     <HBox.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                     </HBox.margin>
-                  </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" stroke="BLACK" strokeType="INSIDE" width="30.0" HBox.hgrow="NEVER">
-                     <HBox.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                     </HBox.margin>
-                  </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" stroke="BLACK" strokeType="INSIDE" width="30.0" HBox.hgrow="NEVER">
-                     <HBox.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                     </HBox.margin>
-                  </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" stroke="BLACK" strokeType="INSIDE" width="30.0" HBox.hgrow="NEVER">
-                     <HBox.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                     </HBox.margin>
-                  </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" stroke="BLACK" strokeType="INSIDE" width="30.0" HBox.hgrow="NEVER">
-                     <HBox.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                     </HBox.margin>
-                  </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" stroke="BLACK" strokeType="INSIDE" width="30.0" HBox.hgrow="NEVER">
-                     <HBox.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                     </HBox.margin>
-                  </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" stroke="BLACK" strokeType="INSIDE" width="30.0" HBox.hgrow="NEVER">
-                     <HBox.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                     </HBox.margin>
-                  </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" stroke="BLACK" strokeType="INSIDE" width="30.0" HBox.hgrow="NEVER">
-                     <HBox.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                     </HBox.margin>
-                  </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" stroke="BLACK" strokeType="INSIDE" width="30.0" HBox.hgrow="NEVER">
-                     <HBox.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                     </HBox.margin>
-                  </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" stroke="BLACK" strokeType="INSIDE" width="30.0">
-                     <HBox.margin>
-                        <Insets top="2.0" />
-                     </HBox.margin>
-                  </Rectangle>
-               </children>
-            </HBox>
-            <HBox>
-               <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" stroke="BLACK" strokeType="INSIDE" width="30.0" HBox.hgrow="NEVER">
-                     <HBox.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                     </HBox.margin>
-                  </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" stroke="BLACK" strokeType="INSIDE" width="30.0" HBox.hgrow="NEVER">
-                     <HBox.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                     </HBox.margin>
-                  </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" stroke="BLACK" strokeType="INSIDE" width="30.0" HBox.hgrow="NEVER">
-                     <HBox.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                     </HBox.margin>
-                  </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" stroke="BLACK" strokeType="INSIDE" width="30.0" HBox.hgrow="NEVER">
-                     <HBox.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                     </HBox.margin>
-                  </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" stroke="BLACK" strokeType="INSIDE" width="30.0" HBox.hgrow="NEVER">
-                     <HBox.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                     </HBox.margin>
-                  </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" stroke="BLACK" strokeType="INSIDE" width="30.0" HBox.hgrow="NEVER">
-                     <HBox.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                     </HBox.margin>
-                  </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" stroke="BLACK" strokeType="INSIDE" width="30.0" HBox.hgrow="NEVER">
-                     <HBox.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                     </HBox.margin>
-                  </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" stroke="BLACK" strokeType="INSIDE" width="30.0" HBox.hgrow="NEVER">
-                     <HBox.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                     </HBox.margin>
-                  </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" stroke="BLACK" strokeType="INSIDE" width="30.0" HBox.hgrow="NEVER">
-                     <HBox.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                     </HBox.margin>
-                  </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" stroke="BLACK" strokeType="INSIDE" width="30.0" HBox.hgrow="NEVER">
-                     <HBox.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                     </HBox.margin>
-                  </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" stroke="BLACK" strokeType="INSIDE" width="30.0" HBox.hgrow="NEVER">
-                     <HBox.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                     </HBox.margin>
-                  </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" stroke="BLACK" strokeType="INSIDE" width="30.0" HBox.hgrow="NEVER">
-                     <HBox.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                     </HBox.margin>
-                  </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" stroke="BLACK" strokeType="INSIDE" width="30.0" HBox.hgrow="NEVER">
-                     <HBox.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                     </HBox.margin>
-                  </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" stroke="BLACK" strokeType="INSIDE" width="30.0" HBox.hgrow="NEVER">
-                     <HBox.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                     </HBox.margin>
-                  </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" stroke="BLACK" strokeType="INSIDE" width="30.0" HBox.hgrow="NEVER">
-                     <HBox.margin>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-                     </HBox.margin>
-                  </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" stroke="BLACK" strokeType="INSIDE" width="30.0">
-                     <HBox.margin>
-                        <Insets top="2.0" />
-                     </HBox.margin>
-                  </Rectangle>
-               </children>
-            </HBox>
          </children>
       </VBox>
-      <HBox layoutX="50.0" layoutY="386.0" prefHeight="50.0" prefWidth="550.0">
+      <HBox layoutX="50.0" layoutY="600.0" prefHeight="50.0" prefWidth="550.0">
          <children>
-            <Button focusTraversable="false" mnemonicParsing="false" text="START NEW GAME">
+            <Button focusTraversable="false" onAction="#startNewGame" mnemonicParsing="false" text="START NEW GAME">
                <HBox.margin>
                   <Insets top="10.0" />
                </HBox.margin>
             </Button>
-            <TextField prefHeight="25.0" prefWidth="170.0">
+            <TextField promptText="[*, o] [row index] [col index]" id="inputRoundValue" fx:id="inputRoundValue" prefHeight="25.0" onAction="#userManualInput" prefWidth="286.0">
                <HBox.margin>
                   <Insets left="10.0" top="10.0" />
                </HBox.margin>
             </TextField>
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="116.0" text="PLAY">
-               <HBox.margin>
-                  <Insets left="10.0" top="10.0" />
-               </HBox.margin>
-            </Button>
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="116.0" text="CLOSE">
+            <Button mnemonicParsing="false" onAction="#exit" prefHeight="25.0" prefWidth="116.0" text="EXIT">
                <HBox.margin>
                   <Insets left="10.0" top="10.0" />
                </HBox.margin>

@@ -80,6 +80,17 @@ public class Game {
     }
 
     /**
+     * Method unmark filed
+     * @param rowInx filed row index
+     * @param colInx field column index
+     * @throws FieldException if field value is game board border or out of range
+     */
+    public void removeFieldMark(Integer rowInx, Integer colInx) throws FieldException {
+        isCorrectField(rowInx, colInx);
+        this.gameBoard.get(rowInx, colInx).removeFieldMark();
+    }
+
+    /**
      * Method set filed as selected by player
      * @param num number of mine around field
      * @param rowInx filed row index
@@ -121,6 +132,18 @@ public class Game {
     public boolean getInfoAboutMine(Integer rowInx, Integer colInx) throws FieldException {
         isCorrectField(rowInx, colInx);
         return this.gameBoard.get(rowInx, colInx).isMine();
+    }
+
+    /**
+     * Method return info about is field mark
+     * @param rowInx index of row field
+     * @param colInx index of column field
+     * @return true if is selected, otherwise false
+     * @throws FieldException if field value is game board border or out of range
+     */
+    public boolean getInfoAboutMark(Integer rowInx, Integer colInx) throws FieldException {
+        isCorrectField(rowInx, colInx);
+        return this.gameBoard.get(rowInx, colInx).isMarked();
     }
 
     /**
