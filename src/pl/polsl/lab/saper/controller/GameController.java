@@ -20,21 +20,34 @@ public class GameController {
 
     private final GameView gameView;        //Game view object handler
     private Game gameModel;                 //Game model object handler
-    private AppController appControllerRef; // TODO
+
+    private final IBridgeAppGame iBridgeAppGame; //Interface communicate AppController and GameController
+    private final IBridgeGameControllerView iBridgeGameControllerView;   //Interface for onMouseFieldClick method
 
     /**
      * Class constructor.
-     * @param ap    app controller ref
-     * @param height new game board height;
-     * @param width  new game board width;
+     * @param iBridgeAppGame IBridgeAppGame interface object
+     * @param height new game board height
+     * @param width  new game board width
      * @throws OutOfMemoryError         when board can't be write to memory
      * @throws IllegalArgumentException when board has wrong arguments value
      */
-    public GameController(AppController ap, Integer  height, Integer width) {
+    public GameController(IBridgeAppGame iBridgeAppGame, Integer height, Integer width) {
         try {
             gameModel = new Game(height, width);
             randomMines(height, width);
-            appControllerRef = ap;
+            this.iBridgeAppGame = iBridgeAppGame;
+            iBridgeGameControllerView = new IBridgeGameControllerView() {
+                @Override
+                public void onMouseButtonPrimaryFieldClick(Index inx) {
+                    GameController.this.onMouseButtonPrimaryFieldClick(inx);
+                }
+
+                @Override
+                public void onMouseButtonSecondaryFieldClick(Index inx) {
+                    GameController.this.onMouseButtonSecondaryFieldClick(inx);
+                }
+            };
         } catch (IllegalArgumentException e) {
             this.gameModel = null;
             throw new IllegalArgumentException(e.getMessage());
@@ -99,8 +112,7 @@ public class GameController {
      * @param boardViewFXML VBox container from .fxml
      */
     public void initializeBoardView(VBox boardViewFXML) {
-
-        gameView.initializeView(boardViewFXML, gameModel.getBoardData(), this);
+        gameView.initializeView(boardViewFXML, gameModel.getBoardData(), iBridgeGameControllerView);
     }
 
     /**
@@ -267,7 +279,7 @@ public class GameController {
                 }
             }
         }
-        this.appControllerRef.updateTreeResult(gameModel.getGameResult());
+        this.iBridgeAppGame.updateTreeResult(gameModel.getGameResult());
         gameView.showResult(gameModel.getGameResult(), minesIndex);
     }
 

@@ -5,7 +5,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.StageStyle;
-import pl.polsl.lab.saper.controller.GameController;
+import pl.polsl.lab.saper.controller.IBridgeGameControllerView;
 import pl.polsl.lab.saper.model.GameBoard;
 import pl.polsl.lab.saper.model.IEnumGame;
 import pl.polsl.lab.saper.model.Index;
@@ -27,9 +27,9 @@ public class GameView implements IErrorView {
      *
      * @param boardViewFXML  main container from .fxml file
      * @param gameBoard      game baord data ref
-     * @param gameController game container ref
+     * @param iBridgeGameControllerView  interface to onClick behaviour
      */
-    public void initializeView(VBox boardViewFXML, GameBoard gameBoard, GameController gameController) {
+    public void initializeView(VBox boardViewFXML, GameBoard gameBoard, IBridgeGameControllerView iBridgeGameControllerView) {
 
         boardViewFXML.getChildren().clear();
 
@@ -49,10 +49,10 @@ public class GameView implements IErrorView {
                 FieldView f = new FieldView(inx, fieldSize);
                 f.getField().setOnMouseClicked(event -> {
                     if (event.getButton() == MouseButton.PRIMARY) {
-                        gameController.onMouseButtonPrimaryFieldClick(inx);
+                        iBridgeGameControllerView.onMouseButtonPrimaryFieldClick(inx);
                         f.getField().setOnMouseClicked(null);
                     } else if (event.getButton() == MouseButton.SECONDARY) {
-                        gameController.onMouseButtonSecondaryFieldClick(inx);
+                        iBridgeGameControllerView.onMouseButtonSecondaryFieldClick(inx);
                     }
                 });
                 this.boardView.add(f);
