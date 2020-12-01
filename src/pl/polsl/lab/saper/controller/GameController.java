@@ -18,21 +18,23 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class GameController {
 
-    private final GameView gameView;    //Game view object handler
-    private Game gameModel;             //Game model object handler
+    private final GameView gameView;        //Game view object handler
+    private Game gameModel;                 //Game model object handler
+    private AppController appControllerRef; // TODO
 
     /**
      * Class constructor.
-     *
+     * @param ap    app controller ref
      * @param height new game board height;
      * @param width  new game board width;
      * @throws OutOfMemoryError         when board can't be write to memory
      * @throws IllegalArgumentException when board has wrong arguments value
      */
-    public GameController(Integer height, Integer width) {
+    public GameController(AppController ap, Integer  height, Integer width) {
         try {
             gameModel = new Game(height, width);
             randomMines(height, width);
+            appControllerRef = ap;
         } catch (IllegalArgumentException e) {
             this.gameModel = null;
             throw new IllegalArgumentException(e.getMessage());
@@ -265,6 +267,7 @@ public class GameController {
                 }
             }
         }
+        this.appControllerRef.updateTreeResult(gameModel.getGameResult());
         gameView.showResult(gameModel.getGameResult(), minesIndex);
     }
 

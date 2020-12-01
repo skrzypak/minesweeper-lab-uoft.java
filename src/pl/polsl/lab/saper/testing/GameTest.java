@@ -134,22 +134,22 @@ class GameTest {
     @Description("Test randomMines method with negative arguments. It is used in GameController in constructor")
     void randomMinesInvalidValueTest() {
         try {
-            GameController gameController = new GameController(0, 0);
+            GameController gameController = new GameController(null,0, 0);
             fail("Can random mines for board with wrong width or height");
         } catch (IllegalArgumentException ignore) {
         }
         try {
-            GameController gameController = new GameController(0, 1);
+            GameController gameController = new GameController(null,0, 1);
             fail("Can random mines for board with wrong width or height");
         } catch (IllegalArgumentException ignore) {
         }
         try {
-            GameController gameController = new GameController(1, 0);
+            GameController gameController = new GameController(null,1, 0);
             fail("Can random mines for board with wrong width or height");
         } catch (IllegalArgumentException ignore) {
         }
         try {
-            GameController gameController = new GameController(-1, 1);
+            GameController gameController = new GameController(null,-1, 1);
             fail("Can random mines for board with wrong width or height");
         } catch (IllegalArgumentException ignore) {
         }
@@ -162,12 +162,12 @@ class GameTest {
     @Description("Test that use @Disabled label")
     void randomMinesBoardNullException() {
         try {
-            GameController gameController = new GameController(null, -1);
+            GameController gameController = new GameController(null,null, -1);
             fail("Can random mines for board with wrong width or height");
         } catch (NullPointerException ignore) {
         }
         try {
-            GameController gameController = new GameController(-1, null);
+            GameController gameController = new GameController(null,-1, null);
             fail("Can random mines for board with wrong width or height");
         } catch (NullPointerException ignore) {
         }
