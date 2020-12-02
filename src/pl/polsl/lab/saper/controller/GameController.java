@@ -21,23 +21,23 @@ public class GameController {
     private final GameView gameView;        //Game view object handler
     private Game gameModel;                 //Game model object handler
 
-    private final IBridgeAppGame iBridgeAppGame; //Interface communicate AppController and GameController
-    private final IBridgeGameControllerView iBridgeGameControllerView;   //Interface for onMouseFieldClick method
+    private final IAppControllerAdapter iAppControllerAdapter; //Interface communicate AppController and GameController
+    private final IGameControllerAdapter iGameControllerAdapter;   //Interface for onMouseFieldClick method
 
     /**
      * Class constructor.
-     * @param iBridgeAppGame IBridgeAppGame interface object
+     * @param iAppControllerAdapter IBridgeAppGame interface object
      * @param height new game board height
      * @param width  new game board width
      * @throws OutOfMemoryError         when board can't be write to memory
      * @throws IllegalArgumentException when board has wrong arguments value
      */
-    public GameController(IBridgeAppGame iBridgeAppGame, Integer height, Integer width) {
+    public GameController(IAppControllerAdapter iAppControllerAdapter, Integer height, Integer width) {
         try {
             gameModel = new Game(height, width);
             randomMines(height, width);
-            this.iBridgeAppGame = iBridgeAppGame;
-            iBridgeGameControllerView = new IBridgeGameControllerView() {
+            this.iAppControllerAdapter = iAppControllerAdapter;
+            iGameControllerAdapter = new IGameControllerAdapter() {
                 @Override
                 public void onMouseButtonPrimaryFieldClick(Index inx) {
                     GameController.this.onMouseButtonPrimaryFieldClick(inx);
@@ -112,7 +112,7 @@ public class GameController {
      * @param boardViewFXML VBox container from .fxml
      */
     public void initializeBoardView(VBox boardViewFXML) {
-        gameView.initializeView(boardViewFXML, gameModel.getBoardData(), iBridgeGameControllerView);
+        gameView.initializeView(boardViewFXML, gameModel.getBoardData(), iGameControllerAdapter);
     }
 
     /**
@@ -279,7 +279,7 @@ public class GameController {
                 }
             }
         }
-        this.iBridgeAppGame.updateTreeResult(gameModel.getGameResult());
+        this.iAppControllerAdapter.updateTreeResult(gameModel.getGameResult());
         gameView.showResult(gameModel.getGameResult(), minesIndex);
     }
 

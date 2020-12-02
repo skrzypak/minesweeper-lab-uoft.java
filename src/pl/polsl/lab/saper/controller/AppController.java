@@ -22,7 +22,7 @@ public class AppController {
     public VBox boardViewFXML;                      // Container that contains fields
     public TreeView<String> treeView;               // Display app running game results
     private GameController gameController;          // Game controller
-    private final IBridgeAppGame iBridgeAppGame;    // Interface communicate AppController and GameController
+    private final IAppControllerAdapter iAppControllerAdapter;    // Interface communicate AppController and GameController
 
     /**
      * Class constructor.
@@ -30,14 +30,14 @@ public class AppController {
     public AppController() {
         this.menuController = new MenuController();
         Optional<Dimensions> init = this.menuController.show();
-        this.iBridgeAppGame = new IBridgeAppGame() {
+        this.iAppControllerAdapter = new IAppControllerAdapter() {
             @Override
             public void updateTreeResult(IEnumGame.GameResult gameResult) {
                 AppController.this.updateTreeResult(gameResult);
             }
         };
         init.ifPresent(dimensions -> this.gameController =
-                new GameController(iBridgeAppGame, dimensions.getHeight(), dimensions.getWidth()));
+                new GameController(iAppControllerAdapter, dimensions.getHeight(), dimensions.getWidth()));
 
     }
 
@@ -62,7 +62,7 @@ public class AppController {
         Optional<Dimensions> init = this.menuController.show();
         if (init.isPresent()) {
             inputRoundValue.setDisable(false);
-            this.gameController = new GameController(iBridgeAppGame, init.get().getHeight(), init.get().getWidth());
+            this.gameController = new GameController(iAppControllerAdapter, init.get().getHeight(), init.get().getWidth());
             gameController.initializeBoardView(boardViewFXML);
         } else {
             inputRoundValue.setDisable(true);

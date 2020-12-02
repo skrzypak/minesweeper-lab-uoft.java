@@ -2,12 +2,12 @@ package pl.polsl.lab.saper.controller;
 import pl.polsl.lab.saper.model.Index;
 
 /**
- * Interface that used to communicate between GameController and GameView
+ * Interface that used to communicate from GameView to GameController
  *
  * @author Konrad Skrzypczyk
  * @version 1.0
  */
-public interface IBridgeGameControllerView {
+public interface IGameControllerAdapter {
 
     /**
      * Method do action when user click primary mouse button on field
